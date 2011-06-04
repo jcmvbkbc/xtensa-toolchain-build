@@ -2,7 +2,7 @@
 
 set -e -x
 
-export TARGET=xtensael-elf
+export TARGET=xtensa-$1-elf
 
 rm -rf build-$TARGET
 mkdir build-$TARGET

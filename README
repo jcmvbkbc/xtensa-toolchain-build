@@ -1,0 +1,3 @@
+Scripts to build binutils, gcc (w/o libc) and gdb for xtensa.
+$ ./prepare.sh target-variant
+$ ./build.sh target-variant
