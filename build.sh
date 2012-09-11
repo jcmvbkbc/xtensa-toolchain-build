@@ -16,4 +16,5 @@ export PARALLEL=-j4
 export PATH=`pwd`/root/bin:$PATH
 ../build-gcc.sh
 ../build-gdb.sh
+../ccache-install.sh
 } 2>&1 | tee build.log
