@@ -1,3 +1,4 @@
 Scripts to build binutils, gcc (w/o libc) and gdb for xtensa.
 $ ./prepare.sh target-variant
+$ ./fixup-gdb.sh # optional, for compatibility with QEMU
 $ ./build.sh target-variant
