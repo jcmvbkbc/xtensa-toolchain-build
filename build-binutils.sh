@@ -1,7 +1,6 @@
-#! /bin/bash
+#! /bin/bash -ex
 
-set -e -x
-BINUTILS=binutils-2.20.1
+. `dirname "$0"`/config
 
 export LANG=C
 

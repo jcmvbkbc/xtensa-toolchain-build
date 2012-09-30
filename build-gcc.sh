@@ -1,9 +1,9 @@
-#! /bin/bash
+#! /bin/bash -ex
 
-GCC=gcc-4.4.5
+. `dirname "$0"`/config
 
-set -e -x
 export LANG=C
+
 rm -rf $GCC
 mkdir $GCC
 cd $GCC

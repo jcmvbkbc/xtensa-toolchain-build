@@ -1,7 +1,6 @@
-#! /bin/bash
+#! /bin/bash -ex
 
-set -e -x
-GDB=gdb-7.2
+. `dirname "$0"`/config
 
 export LANG=C
 

@@ -1,11 +1,6 @@
-#! /bin/bash
+#! /bin/bash -ex
 
-set -xe
-
-BINUTILS=binutils-2.20.1
-GCC=gcc-4.4.5
-GDB=gdb-7.2
-NEWLIB=newlib-1.19.0
+. `dirname "$0"`/config
 
 [ -d $BINUTILS ] || tar -xjf $BINUTILS.tar.bz2
 [ -d $GCC ] || tar -xjf $GCC.tar.bz2
