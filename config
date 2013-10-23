@@ -1,8 +1,8 @@
-BINUTILS=binutils-2.22
-GCC=gcc-4.7.2
-GDB=gdb-7.5
-NEWLIB=newlib-1.19.0
+BINUTILS=binutils-2.23.2
+GCC=gcc-4.8.1
+GDB=gdb-7.6
+NEWLIB=newlib-2.0.0
 
-TARGET=xtensa-$1-elf
+TARGET=xtensa-$VARIANT-$SUFFIX
 
 PARALLEL=-j4

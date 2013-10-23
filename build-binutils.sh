@@ -4,9 +4,10 @@
 
 export LANG=C
 
-mkdir $BINUTILS
-cd $BINUTILS
-../../$BINUTILS/configure --prefix=$PREFIX --target=$TARGET --enable-shared --disable-werror
+rm -rf $BINUTILS-$SUFFIX
+mkdir $BINUTILS-$SUFFIX
+cd $BINUTILS-$SUFFIX
+../../$BINUTILS/configure --prefix=$PREFIX --target=$TARGET --enable-shared --disable-werror "$@"
 make $PARALLEL
 #make check
 make install

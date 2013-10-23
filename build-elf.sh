@@ -1,17 +1,19 @@
 #! /bin/bash -ex
 
+VARIANT=$1
+SUFFIX=elf
 . `dirname "$0"`/config
 
-rm -rf build-$TARGET
-mkdir build-$TARGET
-cd build-$TARGET
+rm -rf build-$VARIANT
+mkdir build-$VARIANT
+cd build-$VARIANT
 
 export PREFIX=`pwd`/root
 
 {
-../build-binutils.sh "$@"
+../build-binutils-elf.sh "$@"
 export PATH=`pwd`/root/bin:$PATH
-../build-gcc.sh "$@"
+../build-gcc-elf.sh "$@"
 ../build-gdb.sh "$@"
 ../ccache-install.sh
 } 2>&1 | tee build.log
