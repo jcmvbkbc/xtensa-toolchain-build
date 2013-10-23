@@ -1,4 +1,16 @@
 Scripts to build binutils, gcc (w/o libc) and gdb for xtensa.
+$ # check config file (vars BINUTILS, GCC, GDB, PARALLEL)
 $ ./prepare.sh target-variant
 $ ./fixup-gdb.sh # optional, for compatibility with QEMU
 $ ./build.sh target-variant
+
+You either need unpacked/overlayed binutils, gcc and gdb in the
+current directory, or archives thereof (unpacked and overlayed
+by prepare.sh).
+
+Further steps to build uClibc, binutils, and gcc for linux.
+$ # check config file (vars LINUX and UCLIBC) and config.uClibc
+$ ./build-linux.sh target-variant
+
+You need unpacked linux and uClibc sources in the current
+directory.

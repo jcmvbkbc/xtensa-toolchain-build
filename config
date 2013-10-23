@@ -2,6 +2,8 @@ BINUTILS=binutils-2.23.2
 GCC=gcc-4.8.1
 GDB=gdb-7.6
 NEWLIB=newlib-2.0.0
+LINUX=linux
+UCLIBC=uClibc
 
 TARGET=xtensa-$VARIANT-$SUFFIX
 
