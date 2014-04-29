@@ -63,7 +63,18 @@ split_linux()
 	rm -rf "$B"
 }
 
+combine_buildroot()
+{
+	rm -rf "$DIR"/{binutils,gcc,gdb}
+	mkdir -p "$DIR"/{binutils,gcc,gdb}
+	tar -xzf "$DST"/binutils-xtensa_${CORE}.tgz -C "$DIR"/binutils
+	tar -xzf "$DST"/gcc-xtensa_${CORE}.tgz -C "$DIR"/gcc
+	tar -xzf "$DST"/gdb-xtensa_${CORE}.tgz -C "$DIR"/gdb
+	tar -czf "$DST"/xtensa_${CORE}.tar.gz -C "$DIR" {binutils,gcc,gdb}
+}
+
 split_binutils "$@"
 split_gcc "$@"
 split_gdb "$@"
 split_linux "$@"
+combine_buildroot "$@"
