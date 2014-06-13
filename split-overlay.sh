@@ -11,32 +11,26 @@ tar -xf "$SRC" -C "$DIR"
 split_binutils()
 {
 	A="$DIR"/binutils
-	B="$DIR"/res
+	B="$DIR"/res/binutils
 
 	mkdir -p "$B"/{bfd,include}
 	cp "$A"/xtensa-modules.c "$B"/bfd
 	cp "$A"/xtensa-config.h "$B"/include
-
-	tar -czf "$DST"/binutils-xtensa_${CORE}.tgz -C "$B" .
-	rm -rf "$B"
 }
 
 split_gcc()
 {
 	A="$DIR"/gcc
-	B="$DIR"/res
+	B="$DIR"/res/gcc
 
 	mkdir -p "$B"/include
 	cp "$A"/xtensa-config.h "$B"/include
-
-	tar -czf "$DST"/gcc-xtensa_${CORE}.tgz -C "$B" .
-	rm -rf "$B"
 }
 
 split_gdb()
 {
 	A="$DIR"/gdb
-	B="$DIR"/res
+	B="$DIR"/res/gdb
 
 	mkdir -p "$B"/{bfd,gdb/{gdbserver,regformats},include}
 	cp "$A"/xtensa-modules.c "$B"/bfd
@@ -46,31 +40,21 @@ split_gdb()
 	cp "$A"/xtensa-xtregs.c "$B"/gdb/gdbserver
 	cp "$A"/xtensa-regmap.c "$B"/gdb/gdbserver
 	cp "$A"/reg-xtensa.dat "$B"/gdb/regformats
-
-	tar -czf "$DST"/gdb-xtensa_${CORE}.tgz -C "$B" .
-	rm -rf "$B"
 }
 
 split_linux()
 {
 	A="$DIR"/config
-	B="$DIR"/res
+	B="$DIR"/res/linux
 
-	mkdir -p "$B"/$CORE/include/variant
-	cp "$A"/{core.h,tie.h,tie-asm.h} "$B"/$CORE/include/variant
-
-	tar -czf "$DST"/linux-xtensa_${CORE}.tgz -C "$B" .
-	rm -rf "$B"
+	mkdir -p "$B"/arch/xtensa/variants/$CORE/include/variant
+	cp "$A"/{core.h,tie.h,tie-asm.h} "$B"/arch/xtensa/variants/$CORE/include/variant
 }
 
 combine_buildroot()
 {
-	rm -rf "$DIR"/{binutils,gcc,gdb}
-	mkdir -p "$DIR"/{binutils,gcc,gdb}
-	tar -xzf "$DST"/binutils-xtensa_${CORE}.tgz -C "$DIR"/binutils
-	tar -xzf "$DST"/gcc-xtensa_${CORE}.tgz -C "$DIR"/gcc
-	tar -xzf "$DST"/gdb-xtensa_${CORE}.tgz -C "$DIR"/gdb
-	tar -czf "$DST"/xtensa_${CORE}.tar.gz -C "$DIR" {binutils,gcc,gdb}
+	B="$DIR"/res
+	tar -czf "$DST"/xtensa_${CORE}.tar.gz -C "$B" {binutils,gcc,gdb,linux}
 }
 
 split_binutils "$@"
