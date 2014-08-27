@@ -2,7 +2,7 @@
 
 . `dirname "$0"`/config
 
-[ -d $BINUTILS ] || tar -xjf $BINUTILS.tar.bz2
+[ -d $BINUTILS ] || { tar -xjf $BINUTILS.tar.bz2 && for file in `dirname "$0"`/patches/binutils/*.patch ; do ( cd $BINUTILS ; patch -p1 ) < $file ; done ; }
 [ -d $GCC ] || tar -xjf $GCC.tar.bz2
 [ -d $GDB ] || tar -xjf $GDB.tar.bz2
 #tar -xzf $NEWLIB.tar.gz
