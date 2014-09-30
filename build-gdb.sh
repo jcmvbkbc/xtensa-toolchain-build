@@ -10,7 +10,7 @@ export LANG=C
 rm -rf $GDB-$SUFFIX
 mkdir $GDB-$SUFFIX
 cd $GDB-$SUFFIX
-../../$GDB/configure --prefix=$PREFIX --target=$TARGET --with-expat
+../../$GDB/configure --prefix=$PREFIX --target=$TARGET --with-expat --disable-werror
 make $PARALLEL
 #make check
 make install
