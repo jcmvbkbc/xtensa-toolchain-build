@@ -11,6 +11,6 @@
 #( cd $NEWLIB ; patch -p1 < ../$NEWLIB.patch )
 #ln -s ../$NEWLIB/{newlib,libgloss} $GCC
 
-tar -xf overlays/xtensa_$1.* -C $BINUTILS --strip-components=1 binutils
-tar -xf overlays/xtensa_$1.* -C $GCC --strip-components=1 gcc
-tar -xf overlays/xtensa_$1.* -C $GDB --strip-components=1 gdb
+for f in overlays/xtensa_*; do tar -xvf ${f} -C $BINUTILS --strip-components=1 binutils; done
+for f in overlays/xtensa_*; do tar -xvf ${f} -C $GCC --strip-components=1 gcc; done
+for f in overlays/xtensa_*; do tar -xvf ${f} -C $GDB --strip-components=1 gdb; done
