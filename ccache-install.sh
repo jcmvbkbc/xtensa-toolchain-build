@@ -2,4 +2,4 @@
 
 cd root/bin
 mkdir -p ../ccache
-find -type f | xargs -i{} ln -sf ../../../ccache.sh ../ccache/{}
+find ./ -type f | xargs -I{} ln -sf ../../../ccache.sh ../ccache/{}
