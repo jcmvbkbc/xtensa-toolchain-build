@@ -36,6 +36,7 @@ split_gdb()
 	cp "$A"/xtensa-modules.c "$B"/bfd
 	cp "$A"/xtensa-config.h "$B"/include
 	cp "$A"/xtensa-config.c "$B"/gdb
+	sed -e '0,/#include/s/#include/#include "defs.h"\n#include/' -i "$B"/gdb/xtensa-config.c
 	cp "$A"/xtensa-xtregs.c "$B"/gdb
 	cp "$A"/xtensa-xtregs.c "$B"/gdb/gdbserver
 	cp "$A"/xtensa-regmap.c "$B"/gdb/gdbserver
