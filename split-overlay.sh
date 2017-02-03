@@ -43,6 +43,15 @@ split_gdb()
 	cp "$A"/reg-xtensa.dat "$B"/gdb/regformats
 }
 
+split_newlib()
+{
+	A="$DIR"/config
+	B="$DIR"/res/newlib
+
+	mkdir -p "$B"/newlib/libc/sys/xtensa/include/xtensa/config
+	cp "$A"/core.h "$B"/newlib/libc/sys/xtensa/include/xtensa/config/core-isa.h
+}
+
 split_linux()
 {
 	A="$DIR"/config
@@ -52,14 +61,25 @@ split_linux()
 	cp "$A"/{core.h,tie.h,tie-asm.h} "$B"/arch/xtensa/variants/$CORE/include/variant
 }
 
+split_uboot()
+{
+	A="$DIR"/config
+	B="$DIR"/res/u-boot
+
+	mkdir -p "$B"/arch/xtensa/include/asm/arch-$CORE
+	cp "$A"/{core.h,tie.h,tie-asm.h} "$B"/arch/xtensa/include/asm/arch-$CORE
+}
+
 combine_buildroot()
 {
 	B="$DIR"/res
-	tar -czf "$DST"/xtensa_${CORE}.tar.gz -C "$B" {binutils,gcc,gdb,linux}
+	tar -czf "$DST"/xtensa_${CORE}.tar.gz -C "$B" {binutils,gcc,gdb,newlib,linux,u-boot}
 }
 
 split_binutils "$@"
 split_gcc "$@"
 split_gdb "$@"
+split_newlib "$@"
 split_linux "$@"
+split_uboot "$@"
 combine_buildroot "$@"
