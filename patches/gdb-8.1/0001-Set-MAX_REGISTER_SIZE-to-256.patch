@@ -1,0 +1,31 @@
+Subject: [PATCH] Set MAX_REGISTER_SIZE to 256.
+
+gdb/
+	* defs.h: Set MAX_REGISTER_SIZE to 256.
+---
+ gdb/defs.h             | 2 -+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+ 2018-03-07  Tom Tromey  <tom@tromey.com>
+ 
+ 	* linux-tdep.c (linux_info_proc): Update.
+diff --git a/gdb/defs.h b/gdb/defs.h
+index a924573b57f8..91988758a3a8 100644
+--- a/gdb/defs.h
++++ b/gdb/defs.h
+@@ -531,11 +531,11 @@ enum symbol_needs_kind
+ /* Dynamic target-system-dependent parameters for GDB.  */
+ #include "gdbarch.h"
+ 
+ /* * Maximum size of a register.  Something small, but large enough for
+    all known ISAs.  If it turns out to be too small, make it bigger.  */
+ 
+-enum { MAX_REGISTER_SIZE = 64 };
++enum { MAX_REGISTER_SIZE = 256 };
+ 
+ /* In findvar.c.  */
+ 
+ template<typename T, typename = RequireLongest<T>>
+-- 
+2.11.0
+
