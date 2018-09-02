@@ -8,7 +8,10 @@
 [ -d $GCC ] || \
 	{ tar -xf $GCC.tar.* && \
 		{ ! [ -d `dirname "$0"`/patches/$GCC ] || cat `dirname "$0"`/patches/$GCC/*.patch | ( cd $GCC ; patch -p1 ) } }
-[ -d $GDB ] || tar -xf $GDB.tar.*
+[ -d $GDB ] || \
+	{ tar -xf $GDB.tar.* && \
+		{ ! [ -d `dirname "$0"`/patches/$GDB ] || cat `dirname "$0"`/patches/$GDB/*.patch | ( cd $GDB ; patch -p1 ) } }
+
 #tar -xzf $NEWLIB.tar.gz
 #( cd $BINUTILS ; patch -p1 < ../$BINUTILS.patch )
 #( cd $GDB ; patch -p1 < ../$GDB.patch )
