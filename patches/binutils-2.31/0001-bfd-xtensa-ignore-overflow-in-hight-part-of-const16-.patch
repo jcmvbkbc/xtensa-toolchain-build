@@ -1,0 +1,42 @@
+From bbb72bc993f7bc52752f1e432b836eeb5a05671a Mon Sep 17 00:00:00 2001
+From: Max Filippov <jcmvbkbc@gmail.com>
+Date: Fri, 7 Dec 2018 12:59:04 -0800
+Subject: [PATCH] bfd: xtensa: ignore overflow in hight part of const16
+ relocation
+
+32-bit constants loaded by two const16 opcodes that involve relocation
+(e.g. calculated as a sum of a symbol and a constant) may overflow,
+resulting in linking error with the following message:
+
+  dangerous relocation: const16: cannot encode: (_start+0x70000000)
+
+They whould wrap around instead.
+
+bfd/
+2018-12-07  Max Filippov  <jcmvbkbc@gmail.com>
+
+	* elf32-xtensa.c (elf_xtensa_do_reloc): Only use bits 16..31 of
+	the relocated value for the high part const16 immediate.
+---
+ bfd/elf32-xtensa.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/bfd/elf32-xtensa.c b/bfd/elf32-xtensa.c
+index cf085b7b0751..de960cd3b8fc 100644
+--- a/bfd/elf32-xtensa.c
++++ b/bfd/elf32-xtensa.c
+@@ -1957,8 +1957,9 @@ elf_xtensa_do_reloc (reloc_howto_type *howto,
+ 	}
+       else if (opcode == get_const16_opcode ())
+ 	{
+-	  /* ALT used for high 16 bits.  */
+-	  newval = relocation >> 16;
++	  /* ALT used for high 16 bits.
++	     Ignore 32-bit overflow.  */
++	  newval = (relocation >> 16) & 0xffff;
+ 	  opnd = 1;
+ 	}
+       else
+-- 
+2.11.0
+
