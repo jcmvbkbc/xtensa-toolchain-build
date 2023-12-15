@@ -1,3 +1,3 @@
 #! /bin/bash -ex
 
-VARIANT=$1 SUFFIX=elf `dirname "$0"`/build-gcc.sh --with-newlib
+VARIANT=$1 SUFFIX=elf `dirname "$0"`/build-gcc.sh --with-newlib "${@:2}"
